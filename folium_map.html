@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html>
+<head>
+    
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+    
+        <script>
+            L_NO_TOUCH = false;
+            L_DISABLE_3D = false;
+        </script>
+    
+    <style>html, body {width: 100%;height: 100%;margin: 0;padding: 0;}</style>
+    <style>#map {position:absolute;top:0;bottom:0;right:0;left:0;}</style>
+    <script src="https://cdn.jsdelivr.net/npm/leaflet@1.9.3/dist/leaflet.js"></script>
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Leaflet.awesome-markers/2.0.2/leaflet.awesome-markers.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/leaflet@1.9.3/dist/leaflet.css"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css"/>
+    <link rel="stylesheet" href="https://netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap-glyphicons.css"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.2.0/css/all.min.css"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Leaflet.awesome-markers/2.0.2/leaflet.awesome-markers.css"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/python-visualization/folium/folium/templates/leaflet.awesome.rotate.min.css"/>
+    
+            <meta name="viewport" content="width=device-width,
+                initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+            <style>
+                #map_18f26b8bb113c63eac318449397db495 {
+                    position: relative;
+                    width: 100.0%;
+                    height: 100.0%;
+                    left: 0.0%;
+                    top: 0.0%;
+                }
+                .leaflet-container { font-size: 1rem; }
+            </style>
+        
+</head>
+<body>
+    
+    
+            <div class="folium-map" id="map_18f26b8bb113c63eac318449397db495" ></div>
+        
+</body>
+<script>
+    
+    
+            var map_18f26b8bb113c63eac318449397db495 = L.map(
+                "map_18f26b8bb113c63eac318449397db495",
+                {
+                    center: [20.0, 0.0],
+                    crs: L.CRS.EPSG3857,
+                    zoom: 2,
+                    zoomControl: true,
+                    preferCanvas: false,
+                }
+            );
+
+            
+
+        
+    
+            var tile_layer_21baa5a4192f1a3168eb7d1023c52fc4 = L.tileLayer(
+                "https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png",
+                {"attribution": "\u0026copy; \u003ca href=\"https://www.openstreetmap.org/copyright\"\u003eOpenStreetMap\u003c/a\u003e contributors \u0026copy; \u003ca href=\"https://carto.com/attributions\"\u003eCARTO\u003c/a\u003e", "detectRetina": false, "maxNativeZoom": 20, "maxZoom": 20, "minZoom": 0, "noWrap": false, "opacity": 1, "subdomains": "abcd", "tms": false}
+            );
+        
+    
+            tile_layer_21baa5a4192f1a3168eb7d1023c52fc4.addTo(map_18f26b8bb113c63eac318449397db495);
+        
+    
+            var marker_6a7fd3ba023a56a6a91dc893997f859c = L.marker(
+                [37.0902, -95.7129],
+                {}
+            ).addTo(map_18f26b8bb113c63eac318449397db495);
+        
+    
+            var icon_498fced5a9435962b9347a05fa1c361e = L.AwesomeMarkers.icon(
+                {"extraClasses": "fa-rotate-0", "icon": "info-sign", "iconColor": "white", "markerColor": "blue", "prefix": "glyphicon"}
+            );
+            marker_6a7fd3ba023a56a6a91dc893997f859c.setIcon(icon_498fced5a9435962b9347a05fa1c361e);
+        
+    
+        var popup_b4a6ae7e174f77fd86cf099d39aa94d0 = L.popup({"maxWidth": 200});
+
+        
+            
+                var html_8c4463bfc79f3f7db5dc3085d4672c5f = $(`<div id="html_8c4463bfc79f3f7db5dc3085d4672c5f" style="width: 100.0%; height: 100.0%;">         <strong>USA</strong><br>         <strong>Skateboarding:</strong> 39<br>         <strong>Boxing:</strong> 41<br>         <strong>Archery:</strong> 33         </div>`)[0];
+                popup_b4a6ae7e174f77fd86cf099d39aa94d0.setContent(html_8c4463bfc79f3f7db5dc3085d4672c5f);
+            
+        
+
+        marker_6a7fd3ba023a56a6a91dc893997f859c.bindPopup(popup_b4a6ae7e174f77fd86cf099d39aa94d0)
+        ;
+
+        
+    
+    
+            var marker_0b3232cebe89b9380818657bde8ddda8 = L.marker(
+                [35.8617, 104.1954],
+                {}
+            ).addTo(map_18f26b8bb113c63eac318449397db495);
+        
+    
+            var icon_17da1ed1fa157a8031a088d08714f8cf = L.AwesomeMarkers.icon(
+                {"extraClasses": "fa-rotate-0", "icon": "info-sign", "iconColor": "white", "markerColor": "blue", "prefix": "glyphicon"}
+            );
+            marker_0b3232cebe89b9380818657bde8ddda8.setIcon(icon_17da1ed1fa157a8031a088d08714f8cf);
+        
+    
+        var popup_36089b7752bc39da05744a1dda722d9b = L.popup({"maxWidth": 200});
+
+        
+            
+                var html_b85db1244b6f3dfeee22899e877b8eab = $(`<div id="html_b85db1244b6f3dfeee22899e877b8eab" style="width: 100.0%; height: 100.0%;">         <strong>Chine</strong><br>         <strong>Skateboarding:</strong> 38<br>         <strong>Boxing:</strong> 32<br>         <strong>Archery:</strong> 18         </div>`)[0];
+                popup_36089b7752bc39da05744a1dda722d9b.setContent(html_b85db1244b6f3dfeee22899e877b8eab);
+            
+        
+
+        marker_0b3232cebe89b9380818657bde8ddda8.bindPopup(popup_36089b7752bc39da05744a1dda722d9b)
+        ;
+
+        
+    
+    
+            var marker_82b7f542cd4285dea9dd99b8808ef14d = L.marker(
+                [36.2048, 138.2529],
+                {}
+            ).addTo(map_18f26b8bb113c63eac318449397db495);
+        
+    
+            var icon_bf6bce7dd19410fa9339da3df9cbfd11 = L.AwesomeMarkers.icon(
+                {"extraClasses": "fa-rotate-0", "icon": "info-sign", "iconColor": "white", "markerColor": "blue", "prefix": "glyphicon"}
+            );
+            marker_82b7f542cd4285dea9dd99b8808ef14d.setIcon(icon_bf6bce7dd19410fa9339da3df9cbfd11);
+        
+    
+        var popup_37340a5ad3729e81ed9f1bf7fc0a89b6 = L.popup({"maxWidth": 200});
+
+        
+            
+                var html_c460f3890a94ac16fcc2f9bd3a13914c = $(`<div id="html_c460f3890a94ac16fcc2f9bd3a13914c" style="width: 100.0%; height: 100.0%;">         <strong>Japon</strong><br>         <strong>Skateboarding:</strong> 27<br>         <strong>Boxing:</strong> 14<br>         <strong>Archery:</strong> 17         </div>`)[0];
+                popup_37340a5ad3729e81ed9f1bf7fc0a89b6.setContent(html_c460f3890a94ac16fcc2f9bd3a13914c);
+            
+        
+
+        marker_82b7f542cd4285dea9dd99b8808ef14d.bindPopup(popup_37340a5ad3729e81ed9f1bf7fc0a89b6)
+        ;
+
+        
+    
+    
+            var marker_ba7d97c6fbdcf965e4d829a262eaf34f = L.marker(
+                [46.6034, 2.2137],
+                {}
+            ).addTo(map_18f26b8bb113c63eac318449397db495);
+        
+    
+            var icon_510e2bff2f733398667d6111d016fd86 = L.AwesomeMarkers.icon(
+                {"extraClasses": "fa-rotate-0", "icon": "info-sign", "iconColor": "white", "markerColor": "blue", "prefix": "glyphicon"}
+            );
+            marker_ba7d97c6fbdcf965e4d829a262eaf34f.setIcon(icon_510e2bff2f733398667d6111d016fd86);
+        
+    
+        var popup_0e4709ce90c62de282be9b98bdf52fbd = L.popup({"maxWidth": 200});
+
+        
+            
+                var html_4f83e382dd5f959705afa873143e3e97 = $(`<div id="html_4f83e382dd5f959705afa873143e3e97" style="width: 100.0%; height: 100.0%;">         <strong>France</strong><br>         <strong>Skateboarding:</strong> 10<br>         <strong>Boxing:</strong> 12<br>         <strong>Archery:</strong> 7         </div>`)[0];
+                popup_0e4709ce90c62de282be9b98bdf52fbd.setContent(html_4f83e382dd5f959705afa873143e3e97);
+            
+        
+
+        marker_ba7d97c6fbdcf965e4d829a262eaf34f.bindPopup(popup_0e4709ce90c62de282be9b98bdf52fbd)
+        ;
+
+        
+    
+    
+            var marker_57673dd3fdf64eab8ce45429b37c760a = L.marker(
+                [51.1657, 10.4515],
+                {}
+            ).addTo(map_18f26b8bb113c63eac318449397db495);
+        
+    
+            var icon_64462cc7e0bea35245b17e0eeb489275 = L.AwesomeMarkers.icon(
+                {"extraClasses": "fa-rotate-0", "icon": "info-sign", "iconColor": "white", "markerColor": "blue", "prefix": "glyphicon"}
+            );
+            marker_57673dd3fdf64eab8ce45429b37c760a.setIcon(icon_64462cc7e0bea35245b17e0eeb489275);
+        
+    
+        var popup_45614a59e47b249de0fdbe3da0e54715 = L.popup({"maxWidth": 200});
+
+        
+            
+                var html_7ae63ca673cfc760c3a274c01c200423 = $(`<div id="html_7ae63ca673cfc760c3a274c01c200423" style="width: 100.0%; height: 100.0%;">         <strong>Allemagne</strong><br>         <strong>Skateboarding:</strong> 10<br>         <strong>Boxing:</strong> 11<br>         <strong>Archery:</strong> 16         </div>`)[0];
+                popup_45614a59e47b249de0fdbe3da0e54715.setContent(html_7ae63ca673cfc760c3a274c01c200423);
+            
+        
+
+        marker_57673dd3fdf64eab8ce45429b37c760a.bindPopup(popup_45614a59e47b249de0fdbe3da0e54715)
+        ;
+
+        
+    
+</script>
+</html>
