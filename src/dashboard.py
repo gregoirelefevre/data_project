@@ -6,8 +6,6 @@ import webbrowser
 import folium
 import dash_bootstrap_components as dbc
 
-
-
 #
 # Data
 #
@@ -58,33 +56,13 @@ def save_folium_map():
     folium_map.save("folium_map.html")
 
 #
-# Création du style et des composants du dashboard
+# Création des composants du dashboard
 #
-def init_app(app):
-    app.title = "Jeux Olympiques 2024"
-    save_folium_map()
-
-    app.layout = html.Div(style={'backgroundColor': colors['background'], 'padding': '0px'},
-                          children=[
-                            html.H1(children=f'Analyse des Jeux Olympiques 2024',
-                                    style={'textAlign': 'center', 'color': colors['black'], 'fontSize': '85px', 'marginBottom': '10px'}),
-                            html.Img(src="https://upload.wikimedia.org/wikipedia/commons/5/5c/Olympic_rings_without_rims.svg", style={'width': '400px', 'height': 'auto', 'display': 'block', 'margin': '0 auto'}), 
-                            # Menu de navigation avec boutons stylisés
-                            html.Div(
-                                children=[
-                                    dbc.Button(
-                                        "Histogramme", id="show-histogram", color="primary", className="mr-2", n_clicks=0,
-                                        style={'fontSize': '18px', 'padding': '10px 20px', 'borderRadius': '8px', 'transition': 'all 0.3s ease'}
-                                    ),
-                                    dbc.Button(
-                                        "Carte", id="show-map", color="primary", className="mr-2", n_clicks=0,
-                                        style={'fontSize': '18px', 'padding': '10px 20px', 'borderRadius': '8px', 'transition': 'all 0.3s ease'}
-                                    ),
-                                ],
-                                style={'textAlign': 'center', 'marginBottom': '20px'}
-                            ),
+def create_hist_view():
+    return html.Div(
+                        children=[
                             html.Label("Sélectionnez un Sport :",
-                                   style={'fontSize': '35px', 'fontWeight': 'bold', 'marginTop': '20px'}),
+                                    style={'fontSize': '35px', 'fontWeight': 'bold', 'marginTop': '20px'}),
                             dcc.Dropdown(
                                 id='dropdown-sports',
                                 options=[
@@ -103,29 +81,82 @@ def init_app(app):
                             html.Div(children=f'''
                                 Cet Histogramme représente la répartition des athlètes en fonction de leurs âge dans la discipline sélectionnée
                             ''', style={'textAlign': 'center', 'fontSize': '20px'}),
-                            html.H1("Carte des pays participants", style={'textAlign': 'center', 'color': '#000000', 'fontSize': '45px', 'marginTop': '100px'}),
-                            html.Div(  # Conteneur pour centrer l'Iframe
-                                children=[
-                                    html.Iframe(
-                                        id='folium-map',
-                                        srcDoc=open("folium_map.html", "r").read(),
-                                        width='60%',
-                                        height='500'
-                                    )
-                                ],
-                                style={
-                                    'display': 'flex',         
-                                    'justifyContent': 'center',  
-                                    'alignItems': 'center',    
-                                    'height': '470px'       
-                                }
-                            ),
-                            html.Div(children=f'''
-                                Cette carte représente les pays participants aux JO 2024, ainsi que leurs résultats respectifs
-                            ''', style={'textAlign': 'center', 'fontSize': '20px', 'marginTop': '25px'})
+                        ]
+                    )
 
+def create_map_view():
+    return html.Div(
+                    children=[
+                        html.H1("Carte des pays participants", style={'textAlign': 'center', 'color': '#000000', 'fontSize': '45px', 'marginTop': '10px'}),
+                        html.Div(  # Conteneur pour centrer l'Iframe
+                            children=[
+                                html.Iframe(
+                                    id='folium-map',
+                                    srcDoc=open("folium_map.html", "r").read(),
+                                    width='60%',
+                                    height='500'
+                                )
+                            ],
+                            style={
+                                'display': 'flex',         
+                                'justifyContent': 'center',  
+                                'alignItems': 'center',    
+                                'height': '470px'       
+                            }
+                        ),
+                        html.Div(children=f'''
+                            Cette carte représente les pays participants aux JO 2024, ainsi que leurs résultats respectifs
+                        ''', style={'textAlign': 'center', 'fontSize': '20px', 'marginTop': '25px'})
+                    ]
+                )
+
+#
+# Création du style et des composants du dashboard
+#
+def init_app(app):
+    app.title = "Jeux Olympiques 2024"
+    save_folium_map()
+    histogram_view = create_hist_view()
+    map_view = create_map_view()
+
+    app.layout = html.Div(style={'backgroundColor': colors['background']},
+                          children=[
+                            html.H1(children=f'Analyse des Jeux Olympiques 2024',
+                                    style={'textAlign': 'center', 'color': colors['black'], 'fontSize': '85px', 'marginBottom': '10px'}),
+                            html.Img(src="https://upload.wikimedia.org/wikipedia/commons/5/5c/Olympic_rings_without_rims.svg", style={'width': '400px', 'height': 'auto', 'display': 'block', 'margin': '0 auto'}), 
+                            # Menu de navigation avec boutons stylisés
+                            html.Div(
+                                children=[
+                                    dbc.Button(
+                                        "Histogramme", id="show-histogram", color="primary", className="mr-2", n_clicks=0,
+                                        style={'fontSize': '18px', 'padding': '10px 20px', 'borderRadius': '12px'}
+                                    ),
+                                    html.Label("         "),
+                                    dbc.Button(
+                                        "Carte", id="show-map", color="primary", className="mr-2", n_clicks=0,
+                                        style={'fontSize': '18px', 'padding': '10px 20px', 'borderRadius': '12px'}
+                                    ),
+                                ],
+                                style={'textAlign': 'center', 'marginTop': '20px'}
+                            ),
+                            # Conteneur pour afficher l'histogramme ou la carte
+                            html.Div(id='content', children=[]),
+                            html.H1("", style={'marginTop': '50px'})
     ]
     )
+    #
+    # Maj du site quand on appuie sur un bouton de navigation
+    # 
+    @app.callback(
+        Output('content', 'children'),
+        Input('show-histogram', 'n_clicks'),
+        Input('show-map', 'n_clicks')
+    )
+    def update_view(histogram_clicks, map_clicks):
+        if histogram_clicks > map_clicks:
+            return histogram_view
+        else:
+            return map_view
     #
     # Maj de l'histogramme quand on séléctionne un sport
     # 
