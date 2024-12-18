@@ -28,41 +28,34 @@ colors = {
 # Création du style et des composants du dashboard
 #
 def init_app():
-    app.title = "Olympic Games 2024"
+    app.title = "Jeux Olympiques 2024"
+
     fig = px.scatter(data[year], x="gdpPercap", y="lifeExp",
                         color="continent",
                         size="pop",
                         hover_name="country")
-    app.layout = html.Div(style={'backgroundColor': colors['background'], 'padding': '20px'},
+
+    app.layout = html.Div(style={'backgroundColor': colors['background'], 'padding': '0px'},
                           children=[
-
-                            html.H1(children=f'Data analysis of the 2024 Olympic Games',
-                                        style={'textAlign': 'center', 'color': colors['blue'], 'font-family': 'Gotham'}),
-                            
-                            html.Label('Year'),
+                            html.H1(children=f'Analyse des Jeux Olympiques 2024',
+                                    style={'textAlign': 'center', 'color': colors['black'], 'fontSize': '50px', 'marginBottom': '10px'}),
+                            html.Img(src="https://upload.wikimedia.org/wikipedia/commons/5/5c/Olympic_rings_without_rims.svg", style={'width': '400px', 'height': 'auto', 'display': 'block', 'margin': '0 auto'}), 
+                            html.Label("Sélectionnez un Sport :",
+                                   style={'fontSize': '18px', 'fontWeight': 'bold'}),
                             dcc.Dropdown(
-                                id="year-dropdown",
+                                id='dropdown-medals',
                                 options=[
-                                    {'label': '1952', 'value': 1952},
-                                    {'label': '1957', 'value': 1957},
-                                    {'label': '1962', 'value': 1962},
-                                    {'label': '1967', 'value': 1967},
-                                    {'label': '1972', 'value': 1972},
-                                    {'label': '1977', 'value': 1977},
-                                    {'label': '1982', 'value': 1982},
-                                    {'label': '1987', 'value': 1987},
-                                    {'label': '1992', 'value': 1992},
-                                    {'label': '1997', 'value': 1997},
-                                    {'label': '2002', 'value': 2002},
-                                    {'label': '2007', 'value': 2007},
+                                    {'label': 'Or', 'value': 'Or'},
+                                    {'label': 'Argent', 'value': 'Argent'},
+                                    {'label': 'Bronze', 'value': 'Bronze'},
                                 ],
-                                value=2007,
+                                value='Or',
+                                style={'width': '500px'}
                             ),
-
                             dcc.Graph(
                                 id='graph1',
                                 figure=fig
-                            ), # (6)
+                            ),
 
                             html.Div(children=f'''
                                 The graph above shows relationship between life expectancy and
