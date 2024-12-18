@@ -4,6 +4,8 @@ import pandas as pd
 import plotly.express as px
 import webbrowser
 import folium
+import dash_bootstrap_components as dbc
+
 
 
 #
@@ -67,6 +69,20 @@ def init_app(app):
                             html.H1(children=f'Analyse des Jeux Olympiques 2024',
                                     style={'textAlign': 'center', 'color': colors['black'], 'fontSize': '85px', 'marginBottom': '10px'}),
                             html.Img(src="https://upload.wikimedia.org/wikipedia/commons/5/5c/Olympic_rings_without_rims.svg", style={'width': '400px', 'height': 'auto', 'display': 'block', 'margin': '0 auto'}), 
+                            # Menu de navigation avec boutons stylisés
+                            html.Div(
+                                children=[
+                                    dbc.Button(
+                                        "Histogramme", id="show-histogram", color="primary", className="mr-2", n_clicks=0,
+                                        style={'fontSize': '18px', 'padding': '10px 20px', 'borderRadius': '8px', 'transition': 'all 0.3s ease'}
+                                    ),
+                                    dbc.Button(
+                                        "Carte", id="show-map", color="primary", className="mr-2", n_clicks=0,
+                                        style={'fontSize': '18px', 'padding': '10px 20px', 'borderRadius': '8px', 'transition': 'all 0.3s ease'}
+                                    ),
+                                ],
+                                style={'textAlign': 'center', 'marginBottom': '20px'}
+                            ),
                             html.Label("Sélectionnez un Sport :",
                                    style={'fontSize': '35px', 'fontWeight': 'bold', 'marginTop': '20px'}),
                             dcc.Dropdown(
