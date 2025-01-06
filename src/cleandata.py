@@ -52,13 +52,16 @@ def load_country() :
     try:
         data = pd.read_csv('data/raw/27/nocs.csv')
         # Les pays dans 'nocs.csv' 
-        cleaned_data = data['country']
-        
+        cleaned_data1 = data['code']
+        cleaned_data2 = data['country']
+
         # Create an empty list
         country_list = []
         
         # Append each country to the list
-        for country in cleaned_data:
+        for code in cleaned_data1:
+            country_list.append(code)
+        for country in cleaned_data2:
             country_list.append(country)
         
         print(country_list)

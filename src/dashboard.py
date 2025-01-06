@@ -1,3 +1,4 @@
+from src.cleandata import load_country
 import dash
 from dash import dcc, html, Input, Output
 import pandas as pd
@@ -19,6 +20,9 @@ data = pd.DataFrame({
     "Longitude": [-95.7129, 104.1954, 138.2529, 2.2137, 10.4515]
 })
 
+# Liste des pays participants
+countries_involved = load_country()
+
 colors = {
     'background': '#f7f7f7',  # Blanc cassé (fond)
     'text': '#000000',        # Noir (texte)
@@ -33,28 +37,25 @@ colors = {
 # Création de la map
 #
 def create_folium_map():
-    # Charger les frontières géographiques (GeoJSON)
-    with open("src/countries.geojson", "r") as geojson_file:
+    # Chargement des frontières géographiques (GeoJSON)
+    with open("data/countries.geojson", "r") as geojson_file:
         geojson_data = json.load(geojson_file)
-
-    # Liste des pays à griser
-    countries_to_gray = ["Anguilla", "Bermuda", "Cayman Islands", "British Virgin Islands", "United States Virgin Islands", "Hong Kong S.A.R.", "Macao S.A.R", "Palestine", "North Korea", "Vatican", "Russia", "Belarus", "Antarctica", "Greenland"]
-
-    # Définir un style pour les pays
+    
+    # Style de remplissage pour les pays
     def style_function(feature):
-        if feature["properties"]["ADMIN"] in countries_to_gray:
-            return {
-                "fillColor": "#8B0000",  # Rouge foncé
-                "color": "#8B0000",      # Bordures rouge foncé
-                "fillOpacity": 0.3,      # Opacité du remplissage
-                "weight": 1,             # Épaisseur des bordures
-            }
-        else:
+        if feature["properties"]["ISO_A3"] in countries_involved or feature["properties"]["ADMIN"] in countries_involved:
             return {
                 "fillColor": "#006400",  # Vert pour les autres
                 "color": "#006400",      # Bordures vertes
                 "fillOpacity": 0.3,      # Opacité du remplissage
                 "weight": 1
+            }
+        else:
+            return {
+                "fillColor": "#8B0000",  # Rouge foncé
+                "color": "#8B0000",      # Bordures rouge foncé
+                "fillOpacity": 0.3,      # Opacité du remplissage
+                "weight": 1,             # Épaisseur des bordures
             }
 
     # Création de la carte
@@ -82,13 +83,12 @@ def create_folium_map():
         ).add_to(folium_map)
     
     return folium_map
-
 def save_folium_map():
     folium_map = create_folium_map()
     folium_map.save("folium_map.html")
 
 #
-# Création des composants du dashboard : Histogramme
+# Création du composant Histogramme
 #
 def create_hist_view():
     return html.Div(
@@ -117,7 +117,7 @@ def create_hist_view():
                     )
 
 #
-# Création des composants du dashboard : Map
+# Création du composant Map
 #
 def create_map_view():
     return html.Div(
@@ -141,7 +141,7 @@ def create_map_view():
                         ),
                         html.Div(children=f'''
                             Cette carte représente les pays participants aux JO 2024, ainsi que leurs résultats respectifs
-                        ''', style={'textAlign': 'center', 'fontSize': '24px', 'marginTop': '30px'})
+                        ''', style={'textAlign': 'center', 'fontSize': '20px', 'marginTop': '25px'})
                     ]
                 )
 
