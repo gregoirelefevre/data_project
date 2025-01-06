@@ -5,6 +5,7 @@ import plotly.express as px
 import webbrowser
 import folium
 import dash_bootstrap_components as dbc
+import json
 
 #
 # Data
@@ -32,9 +33,39 @@ colors = {
 # Création de la map
 #
 def create_folium_map():
+    # Charger les frontières géographiques (GeoJSON)
+    with open("src/countries.geojson", "r") as geojson_file:
+        geojson_data = json.load(geojson_file)
+
+    # Liste des pays à griser
+    countries_to_gray = ["Anguilla", "Bermuda", "Cayman Islands", "British Virgin Islands", "United States Virgin Islands", "Hong Kong S.A.R.", "Macao S.A.R", "Palestine", "North Korea", "Vatican", "Russia", "Belarus", "Antarctica", "Greenland"]
+
+    # Définir un style pour les pays
+    def style_function(feature):
+        if feature["properties"]["ADMIN"] in countries_to_gray:
+            return {
+                "fillColor": "#8B0000",  # Rouge foncé
+                "color": "#8B0000",      # Bordures rouge foncé
+                "fillOpacity": 0.3,      # Opacité du remplissage
+                "weight": 1,             # Épaisseur des bordures
+            }
+        else:
+            return {
+                "fillColor": "#006400",  # Vert pour les autres
+                "color": "#006400",      # Bordures vertes
+                "fillOpacity": 0.3,      # Opacité du remplissage
+                "weight": 1
+            }
+
     # Création de la carte
-    folium_map = folium.Map(location=[20, 0], zoom_start=2, max_bounds=True, min_zoom=2, max_zoom=10, tiles="CartoDB positron")
+    folium_map = folium.Map(location=[20, 0], zoom_start=2, max_bounds=True, min_zoom=2, max_zoom=20, tiles="CartoDB positron")
     folium_map.fit_bounds([[-60, -180], [85, 180]]) # Ajout des limites
+
+    # Appliquer les styles aux pays via GeoJSON
+    folium.GeoJson(
+        geojson_data,
+        style_function=style_function
+    ).add_to(folium_map)
 
     # Ajout des marqueurs pour chaque pays
     for _, row in data.iterrows():
