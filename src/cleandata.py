@@ -43,14 +43,14 @@ def age_distribution_by_sport(cleaned_df):
 
 def clean_data_histo(file_path):
     dictionnaire = age_distribution_by_sport(load_and_clean_data(file_path))
-    pprint.pprint(dictionnaire)  # Pour le debug
-    print(dictionnaire)
+    #pprint.pprint(dictionnaire)  # Pour le debug
+    #print(dictionnaire)
     return dictionnaire
 
 
-def load_country(file_path) :
+def load_country() :
     try:
-        data = pd.read_csv(file_path)
+        data = pd.read_csv('data/raw/27/nocs.csv')
         # Les pays dans 'nocs.csv' 
         cleaned_data = data['country']
         
@@ -61,6 +61,7 @@ def load_country(file_path) :
         for country in cleaned_data:
             country_list.append(country)
         
+        print(country_list)
         return country_list
 
     except Exception as e:

@@ -12,7 +12,7 @@ import webbrowser
 def main():
     getdata()
     clean_data_histo('data/raw/27/athletes.csv')
-    #print(load_country('data/raw/27/nocs.csv'))
+    load_country()
     app = dash.Dash(__name__, suppress_callback_exceptions=True)
     init_app(app)
     webbrowser.open('http://127.0.0.1:8050/')
