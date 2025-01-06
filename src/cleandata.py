@@ -5,16 +5,20 @@ import pprint
 def load_and_clean_data(file_path):
     try:
         data = pd.read_csv(file_path)
-
-        #Le format des sports sur 'athletes.csv' est par exemple : ['Wrestling']
+        
+        # Le format des sports sur 'athletes.csv' est par exemple : ['Wrestling']
         data['sport'] = data['disciplines'].str.strip("[]").str.replace("'", "").apply(
             lambda x: x.split(',')[0] if pd.notnull(x) else None
         )
-        #On calcul l'âge de chaque athletes 
+        
+        # Conversion de la colonne 'birth_date' en datetime
+        data['birth_date'] = pd.to_datetime(data['birth_date'], errors='coerce')
+        
+        # Calcul de l'âge des athlètes
         current_year = datetime.now().year
-        #Calcul l'âge des athlètes avec la date d'aujourd'hui 
-        data['age'] = data['birth_date'].apply(lambda x: current_year if pd.notnull(x) else None)
-        #Ajout de .copy() car sinon erreur Panda car c'est les mêmes dataframes
+        data['age'] = data['birth_date'].apply(lambda x: current_year - x.year if pd.notnull(x) else None)
+        
+        # Ajout de .copy() pour éviter une erreur d'avertissement pandas
         cleaned_data = data[['sport', 'age']].copy()
         return cleaned_data
 
@@ -24,7 +28,7 @@ def load_and_clean_data(file_path):
 
 def age_distribution_by_sport(cleaned_df):
     try:
-        # Create a nested dictionary for age distribution by sport
+        # Crée un dictionnaire imbriqué pour la distribution des âges par sport
         sport_age_distribution = {}
         grouped = cleaned_df.groupby('sport')
 
@@ -38,7 +42,27 @@ def age_distribution_by_sport(cleaned_df):
         raise
 
 def clean_data_histo(file_path):
-    dictionnaire = dict(age_distribution_by_sport(load_and_clean_data(file_path)))
-    #pour debug
-    pprint.pprint(dictionnaire)
+    dictionnaire = age_distribution_by_sport(load_and_clean_data(file_path))
+    pprint.pprint(dictionnaire)  # Pour le debug
+    print(dictionnaire)
     return dictionnaire
+
+
+def load_country(file_path) :
+    try:
+        data = pd.read_csv(file_path)
+        # Les pays dans 'nocs.csv' 
+        cleaned_data = data['country']
+        
+        # Create an empty list
+        country_list = []
+        
+        # Append each country to the list
+        for country in cleaned_data:
+            country_list.append(country)
+        
+        return country_list
+
+    except Exception as e:
+        print(f"An error occurred while loading or cleaning the data: {e}")
+        raise

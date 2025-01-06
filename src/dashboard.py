@@ -141,7 +141,7 @@ def create_map_view():
                         ),
                         html.Div(children=f'''
                             Cette carte représente les pays participants aux JO 2024, ainsi que leurs résultats respectifs
-                        ''', style={'textAlign': 'center', 'fontSize': '20px', 'marginTop': '25px'})
+                        ''', style={'textAlign': 'center', 'fontSize': '24px', 'marginTop': '30px'})
                     ]
                 )
 
@@ -155,30 +155,40 @@ def init_app(app):
     map_view = create_map_view()
 
     app.layout = html.Div(style={'backgroundColor': colors['background']},
-                          children=[
-                            html.H1(children=f'Analyse des Jeux Olympiques 2024',
-                                    style={'textAlign': 'center', 'color': colors['black'], 'fontSize': '85px', 'marginBottom': '10px'}),
-                            html.Img(src="https://upload.wikimedia.org/wikipedia/commons/5/5c/Olympic_rings_without_rims.svg", style={'width': '400px', 'height': 'auto', 'display': 'block', 'margin': '0 auto'}), 
-                            # Menu de navigation avec boutons stylisés
-                            html.Div(
-                                children=[
-                                    dbc.Button(
-                                        "Histogramme", id="show-histogram", color="primary", className="mr-2", n_clicks=0,
-                                        style={'fontSize': '18px', 'padding': '10px 20px', 'borderRadius': '12px'}
-                                    ),
-                                    html.Label("         "),
-                                    dbc.Button(
-                                        "Carte", id="show-map", color="primary", className="mr-2", n_clicks=0,
-                                        style={'fontSize': '18px', 'padding': '10px 20px', 'borderRadius': '12px'}
-                                    ),
-                                ],
-                                style={'textAlign': 'center', 'marginTop': '20px'}
-                            ),
-                            # Conteneur pour afficher l'histogramme ou la carte
-                            html.Div(id='content', children=[]),
-                            html.H1("", style={'marginTop': '50px'})
-    ]
-    )
+         children=[
+             html.H1(children=f'Analyse des Jeux Olympiques 2024', className='olympic-title'), 
+             
+             # Menu de navigation avec boutons stylisés, using Flexbox to position buttons on each side
+             html.Div(
+                 children=[
+                     dbc.Button(
+                         "Histogramme", id="show-histogram", color="primary", className="mr-2", n_clicks=0,
+                         style={'fontSize': '24px', 'padding': '10px 20px', 'borderRadius': '40px'}
+                     ),
+                     html.Img(src="https://upload.wikimedia.org/wikipedia/commons/5/5c/Olympic_rings_without_rims.svg", 
+                    style={'width': '33%', 'height': 'auto', 'display': 'block', 'margin': '0 auto'}),
+                     dbc.Button(
+                         "Carte", id="show-map", color="primary", className="mr-2", n_clicks=0,
+                         style={'fontSize': '24px', 'padding': '10px 20px', 'borderRadius': '40px'}
+                     ),
+                 ],
+                 style={
+                     'display': 'flex',           # Flexbox to align items
+                     'justifyContent': 'space-between',  # Space buttons evenly with space between them
+                     'alignItems': 'center',     # Vertically center the buttons
+                     'width': '80%',             # Ensure buttons don't take full width
+                     'margin': '0 auto',         # Center the flex container
+                     'margin-top': '40px'         # Add some space from the image
+                 }
+             ),
+             
+             # Conteneur pour afficher l'histogramme ou la carte
+             html.Div(className='contentHistMap', id='content', children=[]),
+             
+             html.H1("", style={'marginTop': '50px'})
+         ]
+)
+
     #
     # Maj du site quand on appuie sur un bouton de navigation
     # 
