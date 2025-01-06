@@ -13,7 +13,7 @@ def load_and_clean_data(file_path):
         #On calcul l'âge de chaque athletes 
         current_year = datetime.now().year
         #Calcul l'âge des athlètes avec la date d'aujourd'hui 
-        data['age'] = data['birth_date'].apply(lambda x: current_year - x.year if pd.notnull(x) else None)
+        data['age'] = data['birth_date'].apply(lambda x: current_year if pd.notnull(x) else None)
         #Ajout de .copy() car sinon erreur Panda car c'est les mêmes dataframes
         cleaned_data = data[['sport', 'age']].copy()
         return cleaned_data

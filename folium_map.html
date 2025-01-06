@@ -25,7 +25,7 @@
             <meta name="viewport" content="width=device-width,
                 initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
             <style>
-                #map_d68a81cce3a10829b318b93b1bc28523 {
+                #map_43ccada15ce092331ba4ceadd253a345 {
                     position: relative;
                     width: 100.0%;
                     height: 100.0%;
@@ -39,17 +39,18 @@
 <body>
     
     
-            <div class="folium-map" id="map_d68a81cce3a10829b318b93b1bc28523" ></div>
+            <div class="folium-map" id="map_43ccada15ce092331ba4ceadd253a345" ></div>
         
 </body>
 <script>
     
     
-            var map_d68a81cce3a10829b318b93b1bc28523 = L.map(
-                "map_d68a81cce3a10829b318b93b1bc28523",
+            var map_43ccada15ce092331ba4ceadd253a345 = L.map(
+                "map_43ccada15ce092331ba4ceadd253a345",
                 {
                     center: [20.0, 0.0],
                     crs: L.CRS.EPSG3857,
+                    maxBounds: [[-90, -180], [90, 180]],
                     zoom: 2,
                     zoomControl: true,
                     preferCanvas: false,
@@ -60,145 +61,151 @@
 
         
     
-            var tile_layer_4ed55f38ed1e5800d02e4edc5c810547 = L.tileLayer(
+            var tile_layer_c94122bed1ceb12a2ac2e2f3013ab9b9 = L.tileLayer(
                 "https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png",
-                {"attribution": "\u0026copy; \u003ca href=\"https://www.openstreetmap.org/copyright\"\u003eOpenStreetMap\u003c/a\u003e contributors \u0026copy; \u003ca href=\"https://carto.com/attributions\"\u003eCARTO\u003c/a\u003e", "detectRetina": false, "maxNativeZoom": 20, "maxZoom": 20, "minZoom": 0, "noWrap": false, "opacity": 1, "subdomains": "abcd", "tms": false}
+                {"attribution": "\u0026copy; \u003ca href=\"https://www.openstreetmap.org/copyright\"\u003eOpenStreetMap\u003c/a\u003e contributors \u0026copy; \u003ca href=\"https://carto.com/attributions\"\u003eCARTO\u003c/a\u003e", "detectRetina": false, "maxNativeZoom": 20, "maxZoom": 10, "minZoom": 2, "noWrap": false, "opacity": 1, "subdomains": "abcd", "tms": false}
             );
         
     
-            tile_layer_4ed55f38ed1e5800d02e4edc5c810547.addTo(map_d68a81cce3a10829b318b93b1bc28523);
+            tile_layer_c94122bed1ceb12a2ac2e2f3013ab9b9.addTo(map_43ccada15ce092331ba4ceadd253a345);
         
     
-            var marker_655d8fd0b939da71b3916177afa1b59d = L.marker(
+            map_43ccada15ce092331ba4ceadd253a345.fitBounds(
+                [[-60, -180], [85, 180]],
+                {}
+            );
+        
+    
+            var marker_e31ce5b653217eaf705eecbf3e2b0b20 = L.marker(
                 [37.0902, -95.7129],
                 {}
-            ).addTo(map_d68a81cce3a10829b318b93b1bc28523);
+            ).addTo(map_43ccada15ce092331ba4ceadd253a345);
         
     
-            var icon_7a8ee7913f0da1898a244b5d7150d9bb = L.AwesomeMarkers.icon(
-                {"extraClasses": "fa-rotate-0", "icon": "info-sign", "iconColor": "white", "markerColor": "blue", "prefix": "glyphicon"}
+            var icon_c3b09204d088ab3e28dc8984f50c61f5 = L.AwesomeMarkers.icon(
+                {"extraClasses": "fa-rotate-0", "icon": "info-sign", "iconColor": "white", "markerColor": "black", "prefix": "glyphicon"}
             );
-            marker_655d8fd0b939da71b3916177afa1b59d.setIcon(icon_7a8ee7913f0da1898a244b5d7150d9bb);
+            marker_e31ce5b653217eaf705eecbf3e2b0b20.setIcon(icon_c3b09204d088ab3e28dc8984f50c61f5);
         
     
-        var popup_aabe41a40ab39bb0d7578a46136c3e1a = L.popup({"maxWidth": 200});
+        var popup_cfa71c2e657ddda0fa7e062450118efa = L.popup({"maxWidth": 200});
 
         
             
-                var html_8ef56e88712c75944d0d1e8c12c27156 = $(`<div id="html_8ef56e88712c75944d0d1e8c12c27156" style="width: 100.0%; height: 100.0%;">         <strong>USA</strong><br>         <strong>Skateboarding:</strong> 39<br>         <strong>Boxing:</strong> 41<br>         <strong>Archery:</strong> 33         </div>`)[0];
-                popup_aabe41a40ab39bb0d7578a46136c3e1a.setContent(html_8ef56e88712c75944d0d1e8c12c27156);
+                var html_e96d8f7b0cb59a61580153846b3a85fd = $(`<div id="html_e96d8f7b0cb59a61580153846b3a85fd" style="width: 100.0%; height: 100.0%;">         <strong>USA</strong><br>         <strong>Skateboarding:</strong> 39<br>         <strong>Boxing:</strong> 41<br>         <strong>Archery:</strong> 33         </div>`)[0];
+                popup_cfa71c2e657ddda0fa7e062450118efa.setContent(html_e96d8f7b0cb59a61580153846b3a85fd);
             
         
 
-        marker_655d8fd0b939da71b3916177afa1b59d.bindPopup(popup_aabe41a40ab39bb0d7578a46136c3e1a)
+        marker_e31ce5b653217eaf705eecbf3e2b0b20.bindPopup(popup_cfa71c2e657ddda0fa7e062450118efa)
         ;
 
         
     
     
-            var marker_8541ca26466cd327164f47e30c3c533e = L.marker(
+            var marker_64958277fdde7be57b3704c0ac758fea = L.marker(
                 [35.8617, 104.1954],
                 {}
-            ).addTo(map_d68a81cce3a10829b318b93b1bc28523);
+            ).addTo(map_43ccada15ce092331ba4ceadd253a345);
         
     
-            var icon_b09b2eae2d74eb79ab01e8f099b04ca7 = L.AwesomeMarkers.icon(
-                {"extraClasses": "fa-rotate-0", "icon": "info-sign", "iconColor": "white", "markerColor": "blue", "prefix": "glyphicon"}
+            var icon_05e98cdc98082329c71829ad2b6f6a18 = L.AwesomeMarkers.icon(
+                {"extraClasses": "fa-rotate-0", "icon": "info-sign", "iconColor": "white", "markerColor": "black", "prefix": "glyphicon"}
             );
-            marker_8541ca26466cd327164f47e30c3c533e.setIcon(icon_b09b2eae2d74eb79ab01e8f099b04ca7);
+            marker_64958277fdde7be57b3704c0ac758fea.setIcon(icon_05e98cdc98082329c71829ad2b6f6a18);
         
     
-        var popup_32a31b8566e1dbad396b03d41423ce87 = L.popup({"maxWidth": 200});
+        var popup_4af8c5d2ba281cf1689e198ae4dc0ecf = L.popup({"maxWidth": 200});
 
         
             
-                var html_fbdab21ebd9a1fdd78a490771bbd1431 = $(`<div id="html_fbdab21ebd9a1fdd78a490771bbd1431" style="width: 100.0%; height: 100.0%;">         <strong>Chine</strong><br>         <strong>Skateboarding:</strong> 38<br>         <strong>Boxing:</strong> 32<br>         <strong>Archery:</strong> 18         </div>`)[0];
-                popup_32a31b8566e1dbad396b03d41423ce87.setContent(html_fbdab21ebd9a1fdd78a490771bbd1431);
+                var html_16890d542d4bb63db263f80ccfc93f99 = $(`<div id="html_16890d542d4bb63db263f80ccfc93f99" style="width: 100.0%; height: 100.0%;">         <strong>Chine</strong><br>         <strong>Skateboarding:</strong> 38<br>         <strong>Boxing:</strong> 32<br>         <strong>Archery:</strong> 18         </div>`)[0];
+                popup_4af8c5d2ba281cf1689e198ae4dc0ecf.setContent(html_16890d542d4bb63db263f80ccfc93f99);
             
         
 
-        marker_8541ca26466cd327164f47e30c3c533e.bindPopup(popup_32a31b8566e1dbad396b03d41423ce87)
+        marker_64958277fdde7be57b3704c0ac758fea.bindPopup(popup_4af8c5d2ba281cf1689e198ae4dc0ecf)
         ;
 
         
     
     
-            var marker_1642d1d53fbc70baab076b7483953851 = L.marker(
+            var marker_c769d74d0905707653e33574a28086a1 = L.marker(
                 [36.2048, 138.2529],
                 {}
-            ).addTo(map_d68a81cce3a10829b318b93b1bc28523);
+            ).addTo(map_43ccada15ce092331ba4ceadd253a345);
         
     
-            var icon_742d98e7d541a4a42e29acff61feeba8 = L.AwesomeMarkers.icon(
-                {"extraClasses": "fa-rotate-0", "icon": "info-sign", "iconColor": "white", "markerColor": "blue", "prefix": "glyphicon"}
+            var icon_75609c039657d7b2bcdf0d2a47349423 = L.AwesomeMarkers.icon(
+                {"extraClasses": "fa-rotate-0", "icon": "info-sign", "iconColor": "white", "markerColor": "black", "prefix": "glyphicon"}
             );
-            marker_1642d1d53fbc70baab076b7483953851.setIcon(icon_742d98e7d541a4a42e29acff61feeba8);
+            marker_c769d74d0905707653e33574a28086a1.setIcon(icon_75609c039657d7b2bcdf0d2a47349423);
         
     
-        var popup_891ad0dde50a2f9a1e54218bab5360b2 = L.popup({"maxWidth": 200});
+        var popup_f3121da6b0303bc47541aee6e3b54fa4 = L.popup({"maxWidth": 200});
 
         
             
-                var html_c59cd5b0502ddaeee652391aeaee1063 = $(`<div id="html_c59cd5b0502ddaeee652391aeaee1063" style="width: 100.0%; height: 100.0%;">         <strong>Japon</strong><br>         <strong>Skateboarding:</strong> 27<br>         <strong>Boxing:</strong> 14<br>         <strong>Archery:</strong> 17         </div>`)[0];
-                popup_891ad0dde50a2f9a1e54218bab5360b2.setContent(html_c59cd5b0502ddaeee652391aeaee1063);
+                var html_ae0829cde31917a309f5944fd816cfca = $(`<div id="html_ae0829cde31917a309f5944fd816cfca" style="width: 100.0%; height: 100.0%;">         <strong>Japon</strong><br>         <strong>Skateboarding:</strong> 27<br>         <strong>Boxing:</strong> 14<br>         <strong>Archery:</strong> 17         </div>`)[0];
+                popup_f3121da6b0303bc47541aee6e3b54fa4.setContent(html_ae0829cde31917a309f5944fd816cfca);
             
         
 
-        marker_1642d1d53fbc70baab076b7483953851.bindPopup(popup_891ad0dde50a2f9a1e54218bab5360b2)
+        marker_c769d74d0905707653e33574a28086a1.bindPopup(popup_f3121da6b0303bc47541aee6e3b54fa4)
         ;
 
         
     
     
-            var marker_99afe0aef8a1e122f70156fe61309183 = L.marker(
+            var marker_e270e41906433d4236d8657de416bd46 = L.marker(
                 [46.6034, 2.2137],
                 {}
-            ).addTo(map_d68a81cce3a10829b318b93b1bc28523);
+            ).addTo(map_43ccada15ce092331ba4ceadd253a345);
         
     
-            var icon_c8b588f029e60a80e3287ea557e75117 = L.AwesomeMarkers.icon(
-                {"extraClasses": "fa-rotate-0", "icon": "info-sign", "iconColor": "white", "markerColor": "blue", "prefix": "glyphicon"}
+            var icon_785a2a7529e9eea9e4d790737b2f615b = L.AwesomeMarkers.icon(
+                {"extraClasses": "fa-rotate-0", "icon": "info-sign", "iconColor": "white", "markerColor": "black", "prefix": "glyphicon"}
             );
-            marker_99afe0aef8a1e122f70156fe61309183.setIcon(icon_c8b588f029e60a80e3287ea557e75117);
+            marker_e270e41906433d4236d8657de416bd46.setIcon(icon_785a2a7529e9eea9e4d790737b2f615b);
         
     
-        var popup_829ecb117a98dc190d9e4c847ecdbed0 = L.popup({"maxWidth": 200});
+        var popup_321b32f9f36a51de18b43818fc8e1b1c = L.popup({"maxWidth": 200});
 
         
             
-                var html_7d3cea726510d051d53e04eb069f5728 = $(`<div id="html_7d3cea726510d051d53e04eb069f5728" style="width: 100.0%; height: 100.0%;">         <strong>France</strong><br>         <strong>Skateboarding:</strong> 10<br>         <strong>Boxing:</strong> 12<br>         <strong>Archery:</strong> 7         </div>`)[0];
-                popup_829ecb117a98dc190d9e4c847ecdbed0.setContent(html_7d3cea726510d051d53e04eb069f5728);
+                var html_baf7af7bc7bfc996873442e67fce599a = $(`<div id="html_baf7af7bc7bfc996873442e67fce599a" style="width: 100.0%; height: 100.0%;">         <strong>France</strong><br>         <strong>Skateboarding:</strong> 10<br>         <strong>Boxing:</strong> 12<br>         <strong>Archery:</strong> 7         </div>`)[0];
+                popup_321b32f9f36a51de18b43818fc8e1b1c.setContent(html_baf7af7bc7bfc996873442e67fce599a);
             
         
 
-        marker_99afe0aef8a1e122f70156fe61309183.bindPopup(popup_829ecb117a98dc190d9e4c847ecdbed0)
+        marker_e270e41906433d4236d8657de416bd46.bindPopup(popup_321b32f9f36a51de18b43818fc8e1b1c)
         ;
 
         
     
     
-            var marker_63a8cd997fd4f8b5ec4819854c1cc209 = L.marker(
+            var marker_10d6026f71156ad620a0cc892ae93fcf = L.marker(
                 [51.1657, 10.4515],
                 {}
-            ).addTo(map_d68a81cce3a10829b318b93b1bc28523);
+            ).addTo(map_43ccada15ce092331ba4ceadd253a345);
         
     
-            var icon_637d87eb38abfc1da90af0d29d88144b = L.AwesomeMarkers.icon(
-                {"extraClasses": "fa-rotate-0", "icon": "info-sign", "iconColor": "white", "markerColor": "blue", "prefix": "glyphicon"}
+            var icon_84d761e9881a55137e36ba3be1344bbc = L.AwesomeMarkers.icon(
+                {"extraClasses": "fa-rotate-0", "icon": "info-sign", "iconColor": "white", "markerColor": "black", "prefix": "glyphicon"}
             );
-            marker_63a8cd997fd4f8b5ec4819854c1cc209.setIcon(icon_637d87eb38abfc1da90af0d29d88144b);
+            marker_10d6026f71156ad620a0cc892ae93fcf.setIcon(icon_84d761e9881a55137e36ba3be1344bbc);
         
     
-        var popup_bbfe3f815d7220f9af46e77fbd7f53e9 = L.popup({"maxWidth": 200});
+        var popup_e8b7edf3c9ad8f4a9d7e1d26222af72e = L.popup({"maxWidth": 200});
 
         
             
-                var html_41511d3a4f4b4948a4cb61e4197c31d2 = $(`<div id="html_41511d3a4f4b4948a4cb61e4197c31d2" style="width: 100.0%; height: 100.0%;">         <strong>Allemagne</strong><br>         <strong>Skateboarding:</strong> 10<br>         <strong>Boxing:</strong> 11<br>         <strong>Archery:</strong> 16         </div>`)[0];
-                popup_bbfe3f815d7220f9af46e77fbd7f53e9.setContent(html_41511d3a4f4b4948a4cb61e4197c31d2);
+                var html_9d8b91b3bbab6c0fcdebe56d98d1a44b = $(`<div id="html_9d8b91b3bbab6c0fcdebe56d98d1a44b" style="width: 100.0%; height: 100.0%;">         <strong>Allemagne</strong><br>         <strong>Skateboarding:</strong> 10<br>         <strong>Boxing:</strong> 11<br>         <strong>Archery:</strong> 16         </div>`)[0];
+                popup_e8b7edf3c9ad8f4a9d7e1d26222af72e.setContent(html_9d8b91b3bbab6c0fcdebe56d98d1a44b);
             
         
 
-        marker_63a8cd997fd4f8b5ec4819854c1cc209.bindPopup(popup_bbfe3f815d7220f9af46e77fbd7f53e9)
+        marker_10d6026f71156ad620a0cc892ae93fcf.bindPopup(popup_e8b7edf3c9ad8f4a9d7e1d26222af72e)
         ;
 
         

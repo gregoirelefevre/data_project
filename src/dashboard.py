@@ -32,10 +32,11 @@ colors = {
 # Création de la map
 #
 def create_folium_map():
-    # Création de la carte centrée sur le monde
-    folium_map = folium.Map(location=[20, 0], zoom_start=2, tiles="CartoDB positron")
+    # Création de la carte
+    folium_map = folium.Map(location=[20, 0], zoom_start=2, max_bounds=True, min_zoom=2, max_zoom=10, tiles="CartoDB positron")
+    folium_map.fit_bounds([[-60, -180], [85, 180]]) # Ajout des limites
 
-    # Ajouter des marqueurs pour chaque pays
+    # Ajout des marqueurs pour chaque pays
     for _, row in data.iterrows():
         popup_text = f"""
         <strong>{row['Pays']}</strong><br>
@@ -46,9 +47,9 @@ def create_folium_map():
         folium.Marker(
             location=[row["Latitude"], row["Longitude"]],
             popup=folium.Popup(popup_text, max_width=200),
-            icon=folium.Icon(color="blue", icon="info-sign"),
+            icon=folium.Icon(color="black", icon="info-sign"),
         ).add_to(folium_map)
-
+    
     return folium_map
 
 def save_folium_map():
@@ -56,7 +57,7 @@ def save_folium_map():
     folium_map.save("folium_map.html")
 
 #
-# Création des composants du dashboard
+# Création des composants du dashboard : Histogramme
 #
 def create_hist_view():
     return html.Div(
@@ -84,6 +85,9 @@ def create_hist_view():
                         ]
                     )
 
+#
+# Création des composants du dashboard : Map
+#
 def create_map_view():
     return html.Div(
                     children=[
@@ -174,7 +178,7 @@ def init_app(app):
             labels={"Pays": "Pays", selected_sport: "Nombre de médailles"},
             color_discrete_sequence=['#FFD700' if selected_sport == 'Skateboarding'
                                     else '#C0C0C0' if selected_sport == 'Boxing'
-                                    else '#CD7F32']  # Couleur basée sur la sélection
+                                    else '#CD7F32']  # Couleur sélection
         )
         # Mise en forme du graphique
         fig.update_layout(
