@@ -1,5 +1,4 @@
 /* Effet de survol */
-<<<<<<< Updated upstream
 button:hover {
     background-color: #0056b3 !important;
     transform: scale(1.1);
@@ -9,7 +8,7 @@ button:hover {
 button:active {
     transform: scale(0.95);
     background-color: #003d7a !important;
-=======
+}
 .mr-2:hover {
     background-color: #0056b3 !important;
     cursor: pointer;
@@ -67,15 +66,11 @@ button:active {
 button:active {
     transform: scale(0.95);
     background-color: #EF3340 !important;  /* Red Olympic color */
->>>>>>> Stashed changes
 }
 
 /* Transition douce pour tous les boutons */
 button {
     transition: all 0.3s ease;
-<<<<<<< Updated upstream
-}
-=======
     background-color: #FFD700;  /* Default yellow (Olympic ring) */
     border: none;
     color: #ffffff;
@@ -97,4 +92,4 @@ button:focus {
 .contentHistMap{
     margin-top: 40px;
 }
->>>>>>> Stashed changes
+
