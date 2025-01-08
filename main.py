@@ -1,6 +1,6 @@
 from src.get_dataset import getdata 
 from src.dashboard import init_app
-from src.cleandata import clean_data_histo, load_country
+from src.cleandata import clean_data_histo, load_country, load_ranking
 
 import dash
 from dash import dcc, html, Input, Output
@@ -13,6 +13,7 @@ def main():
     getdata()
     clean_data_histo('data/raw/27/athletes.csv')
     load_country()
+    load_ranking()
     app = dash.Dash(__name__, suppress_callback_exceptions=True)
     init_app(app)
     webbrowser.open('http://127.0.0.1:8050/')

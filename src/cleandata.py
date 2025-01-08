@@ -48,6 +48,27 @@ def clean_data_histo(file_path):
     return dictionnaire
 
 
+def load_ranking() :
+    try:
+        data = pd.read_csv('data/raw/27/medals_total.csv')
+        
+        ranking_dict = {}
+        for index, row in data.iterrows():
+            country = row['country_code']  
+            gold = row['Gold Medal']        
+            silver = row['Silver Medal']    
+            bronze = row['Bronze Medal']   
+            total = row['Total'] 
+            
+            ranking_dict[country] = {'gold': gold, 'silver': silver, 'bronze': bronze, 'total' : total, 'rank' : index+1}
+        print(ranking_dict) 
+        return ranking_dict
+
+    except Exception as e:
+        print(f"An error occurred while loading or cleaning the data: {e}")
+        raise
+
+
 def load_country() :
     try:
         data = pd.read_csv('data/raw/27/nocs.csv')
@@ -64,7 +85,7 @@ def load_country() :
         for country in cleaned_data2:
             country_list.append(country)
         
-        print(country_list)
+        #print(country_list)
         return country_list
 
     except Exception as e:
