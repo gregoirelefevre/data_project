@@ -55,12 +55,13 @@ def load_ranking() :
         ranking_dict = {}
         for index, row in data.iterrows():
             country = row['country_code']  
+            name =  row['country']
             gold = row['Gold Medal']        
             silver = row['Silver Medal']    
             bronze = row['Bronze Medal']   
             total = row['Total'] 
             
-            ranking_dict[country] = {'gold': gold, 'silver': silver, 'bronze': bronze, 'total' : total, 'rank' : index+1}
+            ranking_dict[country] = {'name' : name, 'gold': gold, 'silver': silver, 'bronze': bronze, 'total' : total, 'rank' : index+1}
         print(ranking_dict) 
         return ranking_dict
 
