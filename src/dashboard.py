@@ -89,14 +89,16 @@ def create_folium_map():
         if country_code in countries_medals or country_name in [v["name"] for v in countries_medals.values()]:
             result = countries_medals.get(country_code, countries_medals.get(country_name, {}))
             tooltip_content = f"""
-            <strong>{country_name}</strong><br>
-            Gold: {result.get('gold', 0)}<br>
-            Silver: {result.get('silver', 0)}<br>
-            Bronze: {result.get('bronze', 0)}<br>
-            Rank: {result.get('rank', 0)}
+            <div style="background-color: #006400; color: white; padding: 10px; border-radius: 5px; font-size: 14px; font-weight: bold;">
+                <strong style="font-size: 20px;">{country_name}</strong><br>
+                <span style="color: yellow;">Gold: {result.get('gold', 0)}</span><br>
+                <span style="color: silver;">Silver: {result.get('silver', 0)}</span><br>
+                <span style="color: #cd7f32;">Bronze: {result.get('bronze', 0)}</span><br>
+                <span style="color: #FFFFFF;">Rank: {result.get('rank', 0)}</span>
+            </div>
             """
             
-            # Ajouter le tooltip pour ce pays
+            # Ajouter le message pour ce pays
             folium.GeoJson(
                 feature,
                 style_function=style_function,
@@ -170,16 +172,19 @@ def create_map_view():
                         className='legend',
                         children=[
                             html.Div(className='legend-item', children=[
-                                html.Div(className='legend-color gold'),
-                                html.Span("Pays médaillés des Jeux 2024")
+                                html.Div(className='legend-color medalled'),
+                                html.Span("Pays médaillés")
                             ]),
                             html.Div(className='legend-item', children=[
-                                html.Div(className='legend-color silver'),
-                                html.Span("Pays participants aux Jeux")
+                                html.Div(className='legend-color in'),
+                                html.Span("Pays participants")
                             ]),
                             html.Div(className='legend-item', children=[
-                                html.Div(className='legend-color brown'),
-                                html.Span("Pays ne participants pas aux Jeux")
+                                html.Div(className='legend-color not_in'),
+                                html.Span("Pays non participants")
+                            ]),
+                            html.Div(className='legend-item', children=[
+                                html.Span("\"Les résultats des pays s'affiche au survol de la souris\"")
                             ])
                         ]
                     ),

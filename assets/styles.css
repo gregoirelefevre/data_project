@@ -137,6 +137,7 @@ button:focus {
     display: flex;
     align-items: center;
     margin-bottom: 10px;
+    font-weight: bold;
 }
 
 /* Color box next to each legend item */
@@ -148,16 +149,16 @@ button:focus {
 }
 
 /* Specific colors for each legend item */
-.gold {
-    background-color: gold;
+.medalled {
+    background-color: #006400;
 }
 
-.silver {
-    background-color: silver;
+.in {
+    background-color: #8ead8e;
 }
 
-.brown {
-    background-color: brown;
+.not_in {
+    background-color: #b17d7d;
 }
 
 /* Title style */
