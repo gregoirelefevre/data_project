@@ -137,34 +137,64 @@ def create_hist_view():
         ]
     )
 
-#
-# Création du composant Map
-#
 def create_map_view():
     return html.Div(
-                    children=[
-                        html.H1("Carte des pays participants", style={'textAlign': 'center', 'color': '#000000', 'fontSize': '45px', 'marginTop': '10px'}),
-                        html.Div(  # Conteneur pour centrer l'Iframe
-                            children=[
-                                html.Iframe(
-                                    id='folium-map',
-                                    srcDoc=open("folium_map.html", "r").read(),
-                                    width='60%',
-                                    height='500'
-                                )
-                            ],
-                            style={
-                                'display': 'flex',         
-                                'justifyContent': 'center',  
-                                'alignItems': 'center',    
-                                'height': '470px'       
-                            }
-                        ),
-                        html.Div(children=f'''
-                            Cette carte représente les pays participants aux JO 2024, ainsi que leurs résultats respectifs
-                        ''', style={'textAlign': 'center', 'fontSize': '20px', 'marginTop': '25px'})
-                    ]
-                )
+        children=[
+            html.H1("Carte des pays participants", style={'textAlign': 'center', 'color': '#000000', 'fontSize': '45px', 'marginTop': '10px'}),
+            
+            html.Div(
+                className='main-container',
+                children=[
+                    html.Div(
+                        id='map-div',
+                        className='map',
+                        children=[
+                            html.Iframe(
+                                id='folium-map',
+                                srcDoc=open("folium_map.html", "r").read(),
+                                width='100%',  # Make the map fill its container
+                                height='500'
+                            )
+                        ]
+                    ),
+
+                    # Legend Div (taking 25% width)
+                    html.Div(
+                        id='legend-div',
+                        className='legend',
+                        children=[
+                            html.Div(className='legend-item', children=[
+                                html.Div(className='legend-color gold'),
+                                html.Span("Pays médaillés des Jeux 2024")
+                            ]),
+                            html.Div(className='legend-item', children=[
+                                html.Div(className='legend-color silver'),
+                                html.Span("Pays participants aux Jeux")
+                            ]),
+                            html.Div(className='legend-item', children=[
+                                html.Div(className='legend-color brown'),
+                                html.Span("Pays ne participants pas aux Jeux")
+                            ])
+                        ]
+                    ),
+                ],
+                style={
+                    'display': 'flex',
+                    'justifyContent': 'space-between',  # Space between the map and the legend
+                    'width': '100%',
+                }
+            ),
+            html.Div(
+    children=f'''
+            Cette carte représente les pays participants aux JO 2024, ainsi que leurs résultats respectifs. 
+            Découvrez les performances exceptionnelles des nations qui se sont démarquées dans cette édition historique.
+    ''', 
+    className='description-container'
+    )
+
+        ]
+    )
+
 
 #
 # Création du style et des composants du dashboard
@@ -187,7 +217,7 @@ def init_app(app):
                          style={'fontSize': '24px', 'padding': '10px 20px', 'borderRadius': '40px'}
                      ),
                      html.Img(src="https://upload.wikimedia.org/wikipedia/commons/5/5c/Olympic_rings_without_rims.svg", 
-                    style={'width': '33%', 'height': 'auto', 'display': 'block', 'margin': '0 auto'}),
+                    style={'width': '100%', 'max-width' : '400px', 'height': 'auto', 'display': 'block', 'margin': '0 auto'}),
                      dbc.Button(
                          "Carte", id="show-map", color="primary", className="mr-2", n_clicks=0,
                          style={'fontSize': '24px', 'padding': '10px 20px', 'borderRadius': '40px'}
