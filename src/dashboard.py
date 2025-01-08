@@ -1,4 +1,4 @@
-from src.cleandata import load_country
+from src.cleandata import load_country, load_ranking
 import dash
 from dash import dcc, html, Input, Output
 import pandas as pd
@@ -22,6 +22,8 @@ data = pd.DataFrame({
 
 # Liste des pays participants
 countries_involved = load_country()
+# Dictionnaire des pays médaillés et leurs résultats
+countries_medals = load_ranking()
 
 colors = {
     'background': '#f7f7f7',  # Blanc cassé (fond)
@@ -37,22 +39,31 @@ colors = {
 # Création de la map
 #
 def create_folium_map():
-    # Chargement des frontières géographiques (GeoJSON)
+    # Chargement des frontières
     with open("data/countries.geojson", "r") as geojson_file:
         geojson_data = json.load(geojson_file)
     
     # Style de remplissage pour les pays
     def style_function(feature):
-        if feature["properties"]["ISO_A3"] in countries_involved or feature["properties"]["ADMIN"] in countries_involved:
+        country_name = feature["properties"]["ADMIN"]
+        country_code = feature["properties"]["ISO_A3"]
+        if country_code in countries_medals or country_name in [v["name"] for v in countries_medals.values()]:
             return {
-                "fillColor": "#006400",  # Vert pour les autres
-                "color": "#006400",      # Bordures vertes
+                "fillColor": "#006400",  # Vert foncé pour les médaillés
+                "color": "#006400",      # Bordures vertes 
+                "fillOpacity": 0.5,      # Opacité du remplissage
+                "weight": 1
+            }
+        elif country_code in countries_involved or country_name in countries_involved:
+            return {
+                "fillColor": "#006400",  # Vert canard pour les autres
+                "color": "#006400",      # Bordures Vertes 
                 "fillOpacity": 0.3,      # Opacité du remplissage
                 "weight": 1
             }
         else:
             return {
-                "fillColor": "#8B0000",  # Rouge foncé
+                "fillColor": "#8B0000",  # Rouge foncé pour les non participants
                 "color": "#8B0000",      # Bordures rouge foncé
                 "fillOpacity": 0.3,      # Opacité du remplissage
                 "weight": 1,             # Épaisseur des bordures
@@ -62,25 +73,35 @@ def create_folium_map():
     folium_map = folium.Map(location=[20, 0], zoom_start=2, max_bounds=True, min_zoom=2, max_zoom=20, tiles="CartoDB positron")
     folium_map.fit_bounds([[-60, -180], [85, 180]]) # Ajout des limites
 
+    
     # Appliquer les styles aux pays via GeoJSON
     folium.GeoJson(
         geojson_data,
         style_function=style_function
     ).add_to(folium_map)
 
-    # Ajout des marqueurs pour chaque pays
-    for _, row in data.iterrows():
-        popup_text = f"""
-        <strong>{row['Pays']}</strong><br>
-        <strong>Skateboarding:</strong> {row['Skateboarding']}<br>
-        <strong>Boxing:</strong> {row['Boxing']}<br>
-        <strong>Archery:</strong> {row['Archery']}
-        """
-        folium.Marker(
-            location=[row["Latitude"], row["Longitude"]],
-            popup=folium.Popup(popup_text, max_width=200),
-            icon=folium.Icon(color="black", icon="info-sign"),
-        ).add_to(folium_map)
+    # Ajout des messages au survol des pays
+    for feature in geojson_data['features']:
+        country_name = feature['properties']['ADMIN']
+        country_code = feature['properties']['ISO_A3']
+        
+        # Créer le contenu du message pour les pays médaillés
+        if country_code in countries_medals or country_name in [v["name"] for v in countries_medals.values()]:
+            result = countries_medals.get(country_code, countries_medals.get(country_name, {}))
+            tooltip_content = f"""
+            <strong>{country_name}</strong><br>
+            Gold: {result.get('gold', 0)}<br>
+            Silver: {result.get('silver', 0)}<br>
+            Bronze: {result.get('bronze', 0)}<br>
+            Rank: {result.get('rank', 0)}
+            """
+            
+            # Ajouter le tooltip pour ce pays
+            folium.GeoJson(
+                feature,
+                style_function=style_function,
+                tooltip=folium.Tooltip(tooltip_content)
+            ).add_to(folium_map)
     
     return folium_map
 def save_folium_map():
@@ -92,29 +113,29 @@ def save_folium_map():
 #
 def create_hist_view():
     return html.Div(
-                        children=[
-                            html.Label("Sélectionnez un Sport :",
-                                    style={'fontSize': '35px', 'fontWeight': 'bold', 'marginTop': '20px'}),
-                            dcc.Dropdown(
-                                id='dropdown-sports',
-                                options=[
-                                    {'label': 'Skateboarding', 'value': 'Skateboarding'},
-                                    {'label': 'Boxing', 'value': 'Boxing'},
-                                    {'label': 'Archery', 'value': 'Archery'},
-                                ],
-                                value='Skateboarding',
-                                style={'width': '200px'}
-                            ),
-                            dcc.Graph(
-                                id='histogram',
-                                style={'flexGrow': 1}
-                            ),
+        children=[
+            html.Label("Sélectionnez un Sport :",
+                    style={'fontSize': '35px', 'fontWeight': 'bold', 'marginTop': '20px'}),
+            dcc.Dropdown(
+                id='dropdown-sports',
+                options=[
+                    {'label': 'Skateboarding', 'value': 'Skateboarding'},
+                    {'label': 'Boxing', 'value': 'Boxing'},
+                    {'label': 'Archery', 'value': 'Archery'},
+                ],
+                value='Skateboarding',
+                style={'width': '200px'}
+            ),
+            dcc.Graph(
+                id='histogram',
+                style={'flexGrow': 1}
+            ),
 
-                            html.Div(children=f'''
-                                Cet Histogramme représente la répartition des athlètes en fonction de leurs âge dans la discipline sélectionnée
-                            ''', style={'textAlign': 'center', 'fontSize': '20px'}),
-                        ]
-                    )
+            html.Div(children=f'''
+                Cet Histogramme représente la répartition des athlètes en fonction de leurs âge dans la discipline sélectionnée
+            ''', style={'textAlign': 'center', 'fontSize': '20px'}),
+        ]
+    )
 
 #
 # Création du composant Map
