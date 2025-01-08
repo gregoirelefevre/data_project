@@ -185,3 +185,37 @@ h1 {
     max-width: 800px;
     padding: 0 20px;
 }
+
+/* Container for the whole histogram view */
+.hist-view {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 20px;
+}
+
+/* Style for the label */
+.hist-label {
+    font-size: 35px;
+    font-weight: bold;
+    margin-top: 20px;
+}
+
+/* Dropdown style */
+.hist-dropdown {
+    width: 200px;
+    margin-top: 10px;
+}
+
+/* Graph styling */
+.hist-graph {
+    flex-grow: 1;
+    margin-top: 30px;
+}
+
+/* Text description style */
+.hist-description {
+    text-align: center;
+    font-size: 20px;
+    margin-top: 20px;
+}

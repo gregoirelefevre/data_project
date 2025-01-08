@@ -113,9 +113,12 @@ def save_folium_map():
 #
 def create_hist_view():
     return html.Div(
+        className="hist-view",
         children=[
-            html.Label("Sélectionnez un Sport :",
-                    style={'fontSize': '35px', 'fontWeight': 'bold', 'marginTop': '20px'}),
+            html.Label(
+                "Sélectionnez un Sport :",
+                className="hist-label"
+            ),
             dcc.Dropdown(
                 id='dropdown-sports',
                 options=[
@@ -124,18 +127,21 @@ def create_hist_view():
                     {'label': 'Archery', 'value': 'Archery'},
                 ],
                 value='Skateboarding',
-                style={'width': '200px'}
+                className='hist-dropdown'
             ),
             dcc.Graph(
                 id='histogram',
-                style={'flexGrow': 1}
+                className='hist-graph'
             ),
-
-            html.Div(children=f'''
-                Cet Histogramme représente la répartition des athlètes en fonction de leurs âge dans la discipline sélectionnée
-            ''', style={'textAlign': 'center', 'fontSize': '20px'}),
+            html.Div(
+                children=f'''
+                    Cet Histogramme représente la répartition des athlètes en fonction de leurs âge dans la discipline sélectionnée
+                ''',
+                className='hist-description'
+            ),
         ]
     )
+
 
 def create_map_view():
     return html.Div(
