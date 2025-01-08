@@ -108,8 +108,9 @@ button:focus {
 /* Main container that holds the map and legend side by side */
 .main-container {
     display: flex;
-    width: 100%;
+    width: 80% !important;
     justify-content: space-between;  /* Space between the map and the legend */
+    margin: 0 auto;
 }
 
 /* Map Div */
