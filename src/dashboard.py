@@ -51,14 +51,14 @@ def create_folium_map():
             return {
                 "fillColor": "#006400",  # Vert foncé pour les médaillés
                 "color": "#006400",      # Bordures vertes 
-                "fillOpacity": 0.5,      # Opacité du remplissage
+                "fillOpacity": 0.1 + 0.5*(1-countries_medals[country_code]["rank"]/100),      # Opacité du remplissage
                 "weight": 1
             }
         elif country_code in countries_involved or country_name in countries_involved:
             return {
                 "fillColor": "#006400",  # Vert canard pour les autres
                 "color": "#006400",      # Bordures Vertes 
-                "fillOpacity": 0.3,      # Opacité du remplissage
+                "fillOpacity": 0.1,      # Opacité du remplissage
                 "weight": 1
             }
         else:
@@ -91,19 +91,33 @@ def create_folium_map():
             tooltip_content = f"""
             <div style="background-color: #006400; color: white; padding: 10px; border-radius: 5px; font-size: 14px; font-weight: bold;">
                 <strong style="font-size: 20px;">{country_name}</strong><br>
-                <span style="color: yellow;">Gold: {result.get('gold', 0)}</span><br>
-                <span style="color: silver;">Silver: {result.get('silver', 0)}</span><br>
+                <span style="color: yellow;">Or: {result.get('gold', 0)}</span><br>
+                <span style="color: silver;">Argent: {result.get('silver', 0)}</span><br>
                 <span style="color: #cd7f32;">Bronze: {result.get('bronze', 0)}</span><br>
-                <span style="color: #FFFFFF;">Rank: {result.get('rank', 0)}</span>
+                <span style="color: #FFFFFF;">Rang: {result.get('rank', 0)}</span>
             </div>
             """
-            
-            # Ajouter le message pour ce pays
-            folium.GeoJson(
-                feature,
-                style_function=style_function,
-                tooltip=folium.Tooltip(tooltip_content)
-            ).add_to(folium_map)
+        elif country_code in countries_involved or country_name in countries_involved:
+            tooltip_content = f"""
+            <div style="background-color: #808080; color: white; padding: 10px; border-radius: 5px; font-size: 14px; font-weight: bold;">
+                <strong style="font-size: 20px;">{country_name}</strong><br>
+                <span style="color: #FFFFFF;">Aucune Medaille</span>
+            </div>
+            """
+        else:
+            tooltip_content = f"""
+            <div style="background-color: #c26262; color: white; padding: 10px; border-radius: 5px; font-size: 14px; font-weight: bold;">
+                <strong style="font-size: 20px;">{country_name}</strong><br>
+                <span style="color: #FFFFFF;">Non Participant</span>
+            </div>
+            """
+
+        # Ajouter le message pour ce pays
+        folium.GeoJson(
+            feature,
+            style_function=style_function,
+            tooltip=folium.Tooltip(tooltip_content)
+        ).add_to(folium_map)
     
     return folium_map
 def save_folium_map():
@@ -172,15 +186,15 @@ def create_map_view():
                         className='legend',
                         children=[
                             html.Div(className='legend-item', children=[
-                                html.Div(className='legend-color medalled'),
-                                html.Span("Pays médaillés")
+                                html.Div(className='legend-box medalled'),
+                                html.Span("Rang du pays (1-93)")
                             ]),
                             html.Div(className='legend-item', children=[
-                                html.Div(className='legend-color in'),
+                                html.Div(className='legend-line in'),
                                 html.Span("Pays participants")
                             ]),
                             html.Div(className='legend-item', children=[
-                                html.Div(className='legend-color not_in'),
+                                html.Div(className='legend-line not_in'),
                                 html.Span("Pays non participants")
                             ]),
                             html.Div(className='legend-item', children=[
@@ -195,14 +209,13 @@ def create_map_view():
                     'width': '100%',
                 }
             ),
-            html.Div(
-    children=f'''
-            Cette carte représente les pays participants aux JO 2024, ainsi que leurs résultats respectifs. 
-            Découvrez les performances exceptionnelles des nations qui se sont démarquées dans cette édition historique.
-    ''', 
-    className='description-container'
-    )
 
+            html.Div(
+                children=[
+                    html.H3("Cette carte représente les pays participants aux JO 2024, ainsi que leurs résultats respectifs."),
+                    html.H3("Découvrez les performances exceptionnelles des nations qui se sont démarquées dans cette édition historique !")
+                ]
+            )
         ]
     )
 

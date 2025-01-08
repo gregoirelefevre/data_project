@@ -141,7 +141,15 @@ button:focus {
 }
 
 /* Color box next to each legend item */
-.legend-color {
+.legend-line {
+    width: 20px;
+    height: 5px;
+    margin-right: 10px;
+    border-radius: 4px;  /* Rounded corners for a softer look */
+}
+
+/* Color box next to each legend item */
+.legend-box {
     width: 20px;
     height: 20px;
     margin-right: 10px;
@@ -154,11 +162,11 @@ button:focus {
 }
 
 .in {
-    background-color: #8ead8e;
+    background-color: #006400;
 }
 
 .not_in {
-    background-color: #b17d7d;
+    background-color: #8B0000;
 }
 
 /* Title style */
@@ -175,6 +183,15 @@ h1 {
     align-items: center;
     margin-top: 25px;
     margin-bottom: 100px;
+    font-weight: bold;
+}
+
+h3 {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    font-weight: bold;
 }
 
 .description-text {
