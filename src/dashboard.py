@@ -149,7 +149,7 @@ def create_hist_view():
                 id='histogram',
                 className='hist-graph'
             ),
-            html.Div(
+            html.H3(
                 children=f'''
                     Cet Histogramme représente la répartition des athlètes en fonction de leurs âge dans la discipline sélectionnée
                 ''',
@@ -212,8 +212,7 @@ def create_map_view():
 
             html.Div(
                 children=[
-                    html.H3("Cette carte représente les pays participants aux JO 2024, ainsi que leurs résultats respectifs."),
-                    html.H3("Découvrez les performances exceptionnelles des nations qui se sont démarquées dans cette édition historique !")
+                    html.H3("Cette carte représente les pays participants aux JO 2024, ainsi que leurs résultats respectifs.")
                 ]
             )
         ]

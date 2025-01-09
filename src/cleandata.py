@@ -50,45 +50,34 @@ def clean_data_histo(file_path):
 
 def load_ranking() :
     try:
+        # data <= CSV contenant la liste des pays médaillés et leurs résultats
         data = pd.read_csv('data/raw/27/medals_total.csv')
-        
-        ranking_dict = {}
-        for index, row in data.iterrows():
-            country = row['country_code']  
-            name =  row['country']
-            gold = row['Gold Medal']        
-            silver = row['Silver Medal']    
-            bronze = row['Bronze Medal']   
-            total = row['Total'] 
-            
-            ranking_dict[country] = {'name' : name, 'gold': gold, 'silver': silver, 'bronze': bronze, 'total' : total, 'rank' : index+1}
-        print(ranking_dict) 
+        # ranking_dict <= country_code : name, gold, silver, bronze, total, rank
+        ranking_dict = {
+            row['country_code']: {
+                'name': row['country'],
+                'gold': row['Gold Medal'],
+                'silver': row['Silver Medal'],
+                'bronze': row['Bronze Medal'],
+                'total': row['Total'],
+                'rank': index + 1
+            }
+            for index, row in data.iterrows()
+        }
         return ranking_dict
 
     except Exception as e:
-        print(f"An error occurred while loading or cleaning the data: {e}")
+        print(f"Erreur lors de load_ranking() {e}")
         raise
 
 
 def load_country() :
     try:
+        # data <= CSV contenant la liste des pays participants
         data = pd.read_csv('data/raw/27/nocs.csv')
-        # Les pays dans 'nocs.csv' 
-        cleaned_data1 = data['code']
-        cleaned_data2 = data['country']
-
-        # Create an empty list
-        country_list = []
-        
-        # Append each country to the list
-        for code in cleaned_data1:
-            country_list.append(code)
-        for country in cleaned_data2:
-            country_list.append(country)
-        
-        #print(country_list)
-        return country_list
-
+        # return la liste des Noms et codes des pays participants
+        return data['code'].tolist() + data['country'].tolist()
+    
     except Exception as e:
-        print(f"An error occurred while loading or cleaning the data: {e}")
+        print(f"Erreur lors de load_country() {e}")
         raise
