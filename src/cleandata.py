@@ -32,20 +32,28 @@ def age_distribution_by_sport(cleaned_df):
         sport_age_distribution = {}
         grouped = cleaned_df.groupby('sport')
 
+        # Distribution par sport
         for sport, group in grouped:
             age_counts = group['age'].value_counts().sort_index()
-            sport_age_distribution[sport] = dict(age_counts)
+            sport_age_distribution[sport] = {
+                "age": list(age_counts.index),
+                "nb": list(age_counts.values)
+            }
 
-        return dict(sport_age_distribution)
+        # Ajout de la clé "All" pour regrouper tous les sports
+        all_age_counts = cleaned_df['age'].value_counts().sort_index()
+        sport_age_distribution["All"] = {
+            "age": list(all_age_counts.index),
+            "nb": list(all_age_counts.values)
+        }
+
+        return sport_age_distribution
     except Exception as e:
-        print(f"An error occurred while creating the nested dictionary: {e}")
+        print(f"Erreur dans age_distribution_by_sport(): {e}")
         raise
 
-def clean_data_histo(file_path):
-    dictionnaire = age_distribution_by_sport(load_and_clean_data(file_path))
-    #pprint.pprint(dictionnaire)  # Pour le debug
-    #print(dictionnaire)
-    return dictionnaire
+def clean_data_histo():
+    return age_distribution_by_sport(load_and_clean_data("data/raw/27/athletes.csv"))
 
 
 def load_ranking() :

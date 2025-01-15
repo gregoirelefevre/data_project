@@ -1,4 +1,4 @@
-from src.cleandata import load_country, load_ranking
+from src.cleandata import load_country, load_ranking, clean_data_histo
 import dash
 from dash import dcc, html, Input, Output
 import pandas as pd
@@ -24,6 +24,8 @@ data = pd.DataFrame({
 countries_involved = load_country()
 # Dictionnaire des pays médaillés et leurs résultats
 countries_medals = load_ranking()
+# Dictionnaire des ages des athlètes par sport
+hist_data = clean_data_histo()
 
 colors = {
     'background': '#f7f7f7',  # Blanc cassé (fond)
@@ -137,13 +139,11 @@ def create_hist_view():
             ),
             dcc.Dropdown(
                 id='dropdown-sports',
-                options=[
-                    {'label': 'Skateboarding', 'value': 'Skateboarding'},
-                    {'label': 'Boxing', 'value': 'Boxing'},
-                    {'label': 'Archery', 'value': 'Archery'},
-                ],
-                value='Skateboarding',
-                className='hist-dropdown'
+                options=[{'label': sport, 'value': sport} for sport in hist_data],
+                value='All',  # Valeur par défaut
+                placeholder="Sélectionnez un sport",  # Texte de remplacement
+                className='hist-dropdown',
+                clearable=True  # Permet de retirer la sélection
             ),
             dcc.Graph(
                 id='histogram',
@@ -180,7 +180,7 @@ def create_map_view():
                         ]
                     ),
 
-                    # Legend Div (taking 25% width)
+                    # Légende Div
                     html.Div(
                         id='legend-div',
                         className='legend',
@@ -209,7 +209,6 @@ def create_map_view():
                     'width': '100%',
                 }
             ),
-
             html.Div(
                 children=[
                     html.H3("Cette carte représente les pays participants aux JO 2024, ainsi que leurs résultats respectifs.")
@@ -284,16 +283,16 @@ def init_app(app):
         Input('dropdown-sports', 'value')
     )
     def update_histogram(selected_sport):
+        if selected_sport is None:
+            selected_sport = "All"
         # Créer un histogramme basé sur la sélection
         fig = px.bar(
-            data,
-            x="Pays",
-            y=selected_sport,
+            hist_data[selected_sport],
+            x=hist_data[selected_sport]["age"],
+            y=hist_data[selected_sport]["nb"],
             title=f"Répartition des Athlètes : {selected_sport}",
-            labels={"Pays": "Pays", selected_sport: "Nombre de médailles"},
-            color_discrete_sequence=['#FFD700' if selected_sport == 'Skateboarding'
-                                    else '#C0C0C0' if selected_sport == 'Boxing'
-                                    else '#CD7F32']  # Couleur sélection
+            labels={"x": "Âge", "y": "Nombre d'Athlètes"},
+            color_discrete_sequence=['#FFD700']  # Couleur sélection
         )
         # Mise en forme du graphique
         fig.update_layout(
@@ -301,5 +300,30 @@ def init_app(app):
             paper_bgcolor='#ffffff',  # Fond global
             font_color='#000000',  # Couleur du texte
             title_font_size=20
+        )
+
+        # Personnalisation du style
+        fig.update_layout(
+            plot_bgcolor='#f9f9f9',  # Fond du graphique
+            paper_bgcolor='#f9f9f9',  # Fond global
+            font=dict(
+                size=14,
+                color='#4d4d4d'
+            ),
+            title=dict(
+                font_size=20,
+                x=0.5,  # Centrer le titre
+            ),
+            xaxis=dict(
+                title=dict(font_size=16),
+                tickfont=dict(size=12),
+                gridcolor='lightgrey'
+            ),
+            yaxis=dict(
+                title=dict(font_size=16),
+                tickfont=dict(size=12),
+                gridcolor='lightgrey'
+            ),
+            margin=dict(l=40, r=40, t=50, b=40),  # Marges ajustées
         )
         return fig

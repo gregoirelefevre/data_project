@@ -11,7 +11,7 @@ import webbrowser
 
 def main():
     getdata()
-    clean_data_histo('data/raw/27/athletes.csv')
+    clean_data_histo()
     load_country()
     load_ranking()
     app = dash.Dash(__name__, suppress_callback_exceptions=True)
