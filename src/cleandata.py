@@ -53,13 +53,13 @@ def age_distribution_by_sport(cleaned_df):
         raise
 
 def clean_data_histo():
-    return age_distribution_by_sport(load_and_clean_data("data/raw/27/athletes.csv"))
+    return age_distribution_by_sport(load_and_clean_data("data/raw/athletes.csv"))
 
 
 def load_ranking() :
     try:
         # data <= CSV contenant la liste des pays médaillés et leurs résultats
-        data = pd.read_csv('data/raw/27/medals_total.csv')
+        data = pd.read_csv('data/raw/medals_total.csv')
         # ranking_dict <= country_code : name, gold, silver, bronze, total, rank
         ranking_dict = {
             row['country_code']: {
@@ -82,7 +82,7 @@ def load_ranking() :
 def load_country() :
     try:
         # data <= CSV contenant la liste des pays participants
-        data = pd.read_csv('data/raw/27/nocs.csv')
+        data = pd.read_csv('data/raw/nocs.csv')
         # return la liste des Noms et codes des pays participants
         return data['code'].tolist() + data['country'].tolist()
     

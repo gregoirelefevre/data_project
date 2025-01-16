@@ -217,7 +217,12 @@ def create_map_view():
         ]
     )
 
-
+def create_input():
+    return html.Div(
+        children=[
+                dbc.Input(placeholder="A large input...", size="lg", className="mb-3"),
+                dbc.Input(placeholder="A large input...", size="lg", className="mb-3")]
+    )
 #
 # Création du style et des composants du dashboard
 #
@@ -230,9 +235,9 @@ def init_app(app):
     app.layout = html.Div(style={'backgroundColor': colors['background']},
          children=[
              html.H1(children=f'Analyse des Jeux Olympiques 2024', className='olympic-title'), 
-             
              # Menu de navigation avec boutons stylisés, using Flexbox to position buttons on each side
-             html.Div(
+            
+            html.Div(
                  children=[
                      dbc.Button(
                          "Histogramme", id="show-histogram", color="primary", className="mr-2", n_clicks=0,
