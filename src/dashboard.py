@@ -1,9 +1,8 @@
-from src.cleandata import load_country, load_ranking, clean_data_histo
+from src.cleandata import countries_involved, countries_medals, hist_data
 import dash
 from dash import dcc, html, Input, Output
 import pandas as pd
 import plotly.express as px
-import webbrowser
 import folium
 import dash_bootstrap_components as dbc
 import json
@@ -19,13 +18,6 @@ data = pd.DataFrame({
     "Latitude": [37.0902, 35.8617, 36.2048, 46.6034, 51.1657],
     "Longitude": [-95.7129, 104.1954, 138.2529, 2.2137, 10.4515]
 })
-
-# Liste des pays participants
-countries_involved = load_country()
-# Dictionnaire des pays médaillés et leurs résultats
-countries_medals = load_ranking()
-# Dictionnaire des ages des athlètes par sport
-hist_data = clean_data_histo()
 
 colors = {
     'background': '#f7f7f7',  # Blanc cassé (fond)
@@ -150,7 +142,7 @@ def create_hist_view():
                 className='hist-graph'
             ),
             html.H3(
-                children=f'''
+                children='''
                     Cet Histogramme représente la répartition des athlètes en fonction de leurs âge dans la discipline sélectionnée
                 ''',
                 className='hist-description'
@@ -216,14 +208,6 @@ def create_map_view():
             )
         ]
     )
-
-def create_input():
-    return html.Div(
-        children=[
-                dbc.Input(placeholder="A large input...", size="lg", className="mb-3"),
-                dbc.Input(placeholder="A large input...", size="lg", className="mb-3")]
-    )
-#
 # Création du style et des composants du dashboard
 #
 def init_app(app):
@@ -234,7 +218,7 @@ def init_app(app):
 
     app.layout = html.Div(style={'backgroundColor': colors['background']},
          children=[
-             html.H1(children=f'Analyse des Jeux Olympiques 2024', className='olympic-title'), 
+             html.H1(children='Analyse des Jeux Olympiques 2024', className='olympic-title'), 
              # Menu de navigation avec boutons stylisés, using Flexbox to position buttons on each side
             
             html.Div(
@@ -332,3 +316,7 @@ def init_app(app):
             margin=dict(l=40, r=40, t=50, b=40),  # Marges ajustées
         )
         return fig
+
+if __name__ == "__main__":
+    app = dash.Dash(__name__, suppress_callback_exceptions=True)
+    init_app(app)

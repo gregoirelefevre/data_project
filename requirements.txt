@@ -1,5 +1,6 @@
 kaggle 
 dash
 pandas
-matplotlib
+plotly
 folium
+dash_bootstrap_components

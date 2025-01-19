@@ -1,26 +1,21 @@
-from src.get_dataset import getdata 
+#imports 
+from src.utils.get_dataset import getdata
 from src.dashboard import init_app
-from src.cleandata import clean_data_histo, load_country, load_ranking
-
 import dash
-from dash import dcc, html, Input, Output
-import pandas as pd
-import plotly.express as px
 import webbrowser
 
-
 def main():
+    #getdata() récupère les données et les charge dans 'data/raw'
+    print("Récupération des données...")
     getdata()
-    clean_data_histo()
-    load_country()
-    load_ranking()
+    print("Lancement de l'application...")
+    #initialise l'application
     app = dash.Dash(__name__, suppress_callback_exceptions=True)
     init_app(app)
+
+    # Ouvre le navigateur web automatiquement
     webbrowser.open('http://127.0.0.1:8050/')
-    app.run_server(debug=True)
-
-
-
+    app.run_server(debug=False)  # Désactiver debug pour éviter le double chargement
 
 if __name__ == "__main__":
     main()

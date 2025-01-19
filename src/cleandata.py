@@ -1,6 +1,6 @@
 import pandas as pd
+import os
 from datetime import datetime
-import pprint
 
 def load_and_clean_data(file_path):
     try:
@@ -52,14 +52,14 @@ def age_distribution_by_sport(cleaned_df):
         print(f"Erreur dans age_distribution_by_sport(): {e}")
         raise
 
-def clean_data_histo():
-    return age_distribution_by_sport(load_and_clean_data("data/raw/athletes.csv"))
+def clean_data_histo(file_path):
+    return age_distribution_by_sport(load_and_clean_data(file_path))
 
 
-def load_ranking() :
+def load_ranking(file_path) :
     try:
         # data <= CSV contenant la liste des pays médaillés et leurs résultats
-        data = pd.read_csv('data/raw/medals_total.csv')
+        data = pd.read_csv(file_path)
         # ranking_dict <= country_code : name, gold, silver, bronze, total, rank
         ranking_dict = {
             row['country_code']: {
@@ -79,13 +79,30 @@ def load_ranking() :
         raise
 
 
-def load_country() :
+def load_country(file_path) :
     try:
         # data <= CSV contenant la liste des pays participants
-        data = pd.read_csv('data/raw/nocs.csv')
+        data = pd.read_csv(file_path)
         # return la liste des Noms et codes des pays participants
         return data['code'].tolist() + data['country'].tolist()
     
     except Exception as e:
         print(f"Erreur lors de load_country() {e}")
         raise
+
+if os.path.exists("data/raw/") and os.listdir("data/raw/"): 
+    print("mode api")
+    # Liste des pays participants
+    countries_involved = load_country("data/raw/nocs.csv")
+    # Dictionnaire des pays médaillés et leurs résultats
+    countries_medals = load_ranking("data/raw/medals_total.csv")
+    # Dictionnaire des ages des athlètes par sport
+    hist_data = clean_data_histo("data/raw/athletes.csv")
+else :
+    print("mode local")
+   # Liste des pays participants
+    countries_involved = load_country("data/local/nocs.csv")
+    # Dictionnaire des pays médaillés et leurs résultats
+    countries_medals = load_ranking("data/local/medals_total.csv")
+    # Dictionnaire des ages des athlètes par sport
+    hist_data = clean_data_histo("data/local/athletes.csv") 

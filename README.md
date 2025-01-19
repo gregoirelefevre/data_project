@@ -1,1 +1,60 @@
-# data_project
+# Tableau de bord en Python
+
+## Description
+Ce projet est un tableau de bord interactif conçu en Python, permettant de visualiser et d'analyser des données de manière intuitive et efficace. Il est construit à l'aide de bibliothèques puissantes comme Dash, Plotly et Pandas.
+
+## Fonctionnalités
+- Carte du monde interactive : Visualisation des données sur la carte du monde avec les données sur les médailles de chaque pays, ainsi que leur classement
+- Histogramme : Cet Histogramme représente la répartition des athlètes en fonction de leurs âge dans la discipline sélectionnée
+
+## Prérequis
+- Python 3.12.6 ou une version ultérieure
+- Bibliothèques Python suivantes :
+  - dash
+  - dash_boostrap_components
+  - kaggle
+  - plotly
+  - pandas
+  - folium
+
+## Installation
+1. Clonez le dépôt :
+   ```bash
+   git clone https://github.com/gregoirelefevre/data_project
+   ```
+2. Installez les dépendances :
+   ```bash
+   pip install -r requirements.txt
+   ```
+
+## Utilisation
+1. Lancez l'application :
+   ```bash
+   python main.py
+   ```
+2. Cela ouvre normalement votre navigateur automatiquement à l'adresse suivante :
+   ```
+   http://127.0.0.1:8050/
+   ```
+
+## Structure du projet
+.
+├── assets/                  # Contient le style.css de notre site
+├── data/                    # Données 
+│   ├── local/               # Données locales 
+│   ├── raw/                 # Données brutes d'entrée
+│   └── countries.geojson    # Fichier GeoJSON utilisé pour les cartes
+├── src/                     # Code source principal
+│   ├── __pycache__/         # Cache Python
+│   ├── dashboard.py 
+│   ├── cleandata.py  
+│   └── utils/               # Scripts utilitaires
+│       └── get_dataset.py   # Récupération des données
+├── .gitignore               # Fichiers à ignorer par Git
+├── folium_map.html          # Carte générée avec Folium
+├── main.py                  # Script principal du projet
+├── README.md                # Documentation du projet
+├── requirements.txt         # Dépendances nécessaires
+└── video.mp4                # Vidéo explicative du projet
+
+
