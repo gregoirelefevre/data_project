@@ -39,23 +39,22 @@ Ce projet est un tableau de bord interactif conçu en Python, permettant de visu
 
 ## Structure du projet
 **.**
-├── **assets/**                  # Contient le style.css de notre site
-├── **data/**                    # Données 
-│   ├── **local/**               # Données locales 
-│   ├── **raw/**                 # Données brutes d'entrée
-│   └── **countries.geojson**    # Fichier GeoJSON utilisé pour les cartes
-├── **src/**                     # Code source principal
-│   ├── **__pycache__/**         # Cache Python
-│   ├── **dashboard.py**         # Script pour le tableau de bord
-│   ├── **cleandata.py**         # Nettoyage des données
-│   └── **utils/**               # Scripts utilitaires
-│       └── **get_dataset.py**   # Récupération des données
-├── **.gitignore**               # Fichiers à ignorer par Git
-├── **folium_map.html**          # Carte générée avec Folium
-├── **main.py**                  # Script principal du projet
-├── **README.md**                # Documentation du projet
-├── **requirements.txt**         # Dépendances nécessaires
-└── **video.mp4**                # Vidéo explicative du projet
-
+- **assets/**                  # Contient le style.css de notre site
+- **data/**                    # Données 
+  - **local/**                 # Données locales 
+  - **raw/**                   # Données brutes d'entrée
+  - **countries.geojson**      # Fichier GeoJSON utilisé pour les cartes
+- **src/**                     # Code source principal
+  - **__pycache__/**           # Cache Python
+  - **dashboard.py**           # Script pour le tableau de bord
+  - **cleandata.py**           # Nettoyage des données
+  - **utils/**                 # Scripts utilitaires
+    - **get_dataset.py**       # Récupération des données
+- **.gitignore**               # Fichiers à ignorer par Git
+- **folium_map.html**          # Carte générée avec Folium
+- **main.py**                  # Script principal du projet
+- **README.md**                # Documentation du projet
+- **requirements.txt**         # Dépendances nécessaires
+- **video.mp4**                # Vidéo explicative du projet
 
 
